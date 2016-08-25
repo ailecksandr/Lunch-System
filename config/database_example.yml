@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: utf-8
+  username: <username>
+  password: <password>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: JetRubyTest_dev
+
+test:
+  <<: *default
+  database: JetRubyTest_test
+
+production:
+  <<: *default
+  database: JetRubyTest_prod

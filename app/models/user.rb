@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  ROLES = %w[user lunch_admin admin system]
+  ROLES = %w[user admin system]
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
@@ -11,6 +11,10 @@ class User < ApplicationRecord
   scope :confirmed, -> { where.not(confirmed_at: nil) }
 
   def after_confirmation
-    self.update(role: 'lunch_admin') if User.confirmed.size == 1
+    self.update(role: 'admin') if User.confirmed.size == 1
+  end
+
+  def role?(role)
+    self.role == role.to_s
   end
 end

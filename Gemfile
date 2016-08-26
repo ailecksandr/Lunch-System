@@ -40,6 +40,7 @@ gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootst
 gem 'devise-bootstrap-views'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'bootstrap-filestyle-rails'
+gem 'smart_listing'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

@@ -13,6 +13,11 @@
           = link_to 'Link 2', '/path2'
       %ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
+          - if current_user.role?(:admin)
+            %li
+              = link_to 'Users list', users_path
+            %li
+              = link_to 'Food list', items_path
           %li
             = link_to 'Private cabinet', edit_user_registration_path
           %li

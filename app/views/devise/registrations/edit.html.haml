@@ -1,0 +1,29 @@
+= content_for :plugins do
+  = javascript_include_tag 'plugins/file-field'
+= content_for :styles do
+  = stylesheet_link_tag 'forms'
+= bootstrap_devise_error_messages!
+.panel.panel-default.devise-bs
+  .panel-heading
+    %h4= t('.title', :resource => resource_class.model_name.human , :default => "Edit profile")
+  .panel-body
+    = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+      .col-md-6
+        .form-group
+          = f.label :nickname
+          = f.text_field :nickname, autofocus: true, class: 'form-control'
+        .avatar.form-group
+          = image_tag resource.avatar.url, class: 'img-thumbnail'
+        .file-field-container
+          = f.file_field :avatar, accept: 'image/png, image/jpeg', placeholder: 'Change photo'
+        = f.submit 'Update profile', class: 'btn btn-primary right'
+      .col-md-6
+        = label_tag 'Change password'
+        = form_for(@user, url: change_password_user_registration_path  ) do |f|
+          .form-group
+            = f.password_field :current_password, placeholder: 'Current password', class: 'form-control'
+          .form-group
+            = f.password_field :password, :autocomplete => 'off', placeholder: 'New password', class: 'form-control'
+          .form-group
+            = f.password_field :password_confirmation, placeholder: 'Password confirmation', class: 'form-control'
+          = f.submit 'Change password', class: 'btn btn-info right', data: { disable_with: 'Обробка...' }

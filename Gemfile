@@ -19,7 +19,7 @@ gem 'coffee-rails', '~> 4.2'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
+# gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
@@ -29,10 +29,17 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'hamlit'
 gem 'hamlit-rails'
+gem 'html2haml'
 gem 'devise'
 gem 'cancancan'
-gem 'bootstrap-sass'
 gem 'figaro'
+gem 'simple_form'
+gem 'paperclip', '~> 5.0.0'
+gem 'therubyracer'
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem 'devise-bootstrap-views'
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap-filestyle-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

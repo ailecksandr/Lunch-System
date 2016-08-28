@@ -1,0 +1,15 @@
+%h1= humanize_type!(type)
+%table.table.table-striped
+  %thead
+    %th.col-md-9 Name
+    %th.col-md-3 Price
+  - meals.each do |meal|
+    %tr
+      %td= meal.item.name
+      %td
+        = meal.price
+        %small UAH
+      - if defined?(f)
+        %td.actions
+          = f.radio_button "#{meal.item.item_type}", meal.id, checked: false, class: 'radio',
+            data: { type: meal.item.item_type, price: meal.price }

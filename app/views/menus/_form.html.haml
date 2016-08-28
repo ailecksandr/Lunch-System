@@ -1,0 +1,19 @@
+%table.table.table-striped
+  %thead
+    %th.col-md-6 Name
+    %th.col-md-6 Price
+  %tbody
+    - meals.each do |meal|
+      %tr
+        %td= meal.item.name
+        %td= meal.price
+        %td.actions
+          = link_to '#', data: { target: "#meals_#{meal.id}", toggle: :modal, placement: :bottom } do
+            %i.fa.fa-pencil
+          -#TODO just if not related
+          = link_to meal_path(meal, type: type), method: :delete, remote: true, data: { confirm: 'Are you sure?'} do
+            %i.fa.fa-trash
+      = render partial: 'menus/modal', locals: { meal: meal, type: type }
+    = link_to '#', data: { target: "#new_#{type}", toggle: :modal, placement: :bottom } do
+      %i.fa.fa-plus.right
+    = render partial: 'menus/modal', locals: { type: type }

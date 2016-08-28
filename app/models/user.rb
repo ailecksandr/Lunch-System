@@ -1,6 +1,7 @@
 class User < ApplicationRecord
-  ROLES = %w[user admin system]
+  ROLES = %w(user admin system)
 
+  has_many :orders, dependent: :destroy
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 

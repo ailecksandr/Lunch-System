@@ -5,9 +5,15 @@ Rails.application.config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
 # stylesheets
 Rails.application.config.assets.precompile += %w(
   forms.sass
+  items.sass
+  menus.sass
+  orders.sass
 )
 
 # javascripts
 Rails.application.config.assets.precompile += %w(
   plugins/file-field.coffee
+  menus.coffee
+  items.coffee
+  orders.coffee
 )

@@ -4,4 +4,6 @@
 #= require twitter/bootstrap
 #= require plugins/flashes.coffee
 #= require bootstrap-filestyle
-#= require smart_listing
+#= require bootstrap-select
+#= require plugins/confirmation
+#= require bootstrap-datepicker

@@ -1,0 +1,15 @@
+.modal.fade{ id: defined?(meal) ? "meals_#{meal.id}" : "new_#{type}", 'aria-hidden': true, 'aria-labelledby': :myModalLabel, role: :dialog, tabindex: '-1' }
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %h4.modal-title= defined?(meal) ? 'Changing meal' : 'Creating meal'
+      = bootstrap_form_for defined?(meal)? meal : Meal.new, remote: true, format: :js do |f|
+        .modal-body
+          .form-group
+            = f.select :item_id, options_from_collection_for_select(items_for_select(type), :id, :name, selected: defined?(meal)? meal.item.id : ''), { include_blank: '<Nothing is selected>'}
+          .form-group
+            = f.number_field :price, step: '0.01', min: '0.01'
+          = hidden_field_tag :type, type
+        .modal-footer
+          .actions
+            = f.submit 'OK', class: ' btn btn-shadow btn-info confirm', data: { target: defined?(meal) ? "#meals_#{meal.id}" : "#new_#{type}", toggle: :modal }

@@ -10,29 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160826201912) do
+ActiveRecord::Schema.define(version: 20160827225344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "items", force: :cascade do |t|
     t.string   "name",       null: false
-    t.string   "type"
+    t.string   "item_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_items_on_name", unique: true, using: :btree
   end
 
-  create_table "items_menus", id: false, force: :cascade do |t|
-    t.integer "menu_id"
-    t.integer "item_id"
-    t.decimal "price",   precision: 7, scale: 2
-    t.index ["item_id"], name: "index_items_menus_on_item_id", using: :btree
-    t.index ["menu_id"], name: "index_items_menus_on_menu_id", using: :btree
+  create_table "meals", force: :cascade do |t|
+    t.decimal  "price",      precision: 7, scale: 2
+    t.integer  "item_id"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.index ["item_id"], name: "index_meals_on_item_id", using: :btree
   end
 
-  create_table "menus", force: :cascade do |t|
+  create_table "menu_items", force: :cascade do |t|
+    t.integer  "order_id"
+    t.integer  "meal_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["meal_id"], name: "index_menu_items_on_meal_id", using: :btree
+    t.index ["order_id"], name: "index_menu_items_on_order_id", using: :btree
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|

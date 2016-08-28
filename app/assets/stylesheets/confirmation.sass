@@ -1,0 +1,45 @@
+.modal.custom
+  .modal-dialog
+    z-index: inherit
+  .modal-content:after
+    content: ''
+    position: absolute
+    left: 0
+    bottom: 0
+    width: 100%
+    height: 7px
+    background: #35353f
+    border-radius: 0 0 4px 4px
+  .modal-header
+    background: #efefef
+    color: #428bca
+    font-weight: bold
+    text-transform: uppercase
+    border-radius: 6px 6px 0 0
+    text-align: center
+    border-bottom: none
+  .confirmation-header
+    background: #fff
+  .modal-body
+    padding: 20px
+
+  .modal-footer
+    background-color: #efefef
+    padding: 10px 10px 17px 10px
+    border-radius: 0 0 6px 6px
+    text-align: center
+    border-top: none
+    .btn
+      border: none
+      padding: 2px 11px 3px
+      font-size: 0.8em
+    .confirm
+      color: #fff
+      text-shadow: 0 1px 0 rgba(0,0,0,.25)
+      background-color: #444
+      &:hover
+        background-color: #35353f
+    .cancel
+      background: none
+      &:hover
+        color: #999

@@ -1,1 +1,33 @@
-= smart_listing_render(:items)
+= content_for :plugins do
+  = javascript_include_tag 'items'
+= content_for :styles do
+  = stylesheet_link_tag 'items'
+
+.panel.panel-default
+  .panel-heading
+    %h4 Items list
+  .panel-body
+    - unless @food.empty?
+      %table.table.table-striped
+        %thead
+          %th.col-md-8 Name
+          %th.col-md-4 Type
+        %tbody
+          - @food.each do |item|
+            %tr
+              %td= item.name
+              %td= humanize_type!(item.item_type)
+              %td.actions
+                = link_to '#', data: { target: "#items_#{item.id}", toggle: :modal, placement: :bottom } do
+                  %i.fa.fa-pencil
+                -#TODO just if not related
+                = link_to item_path(item), method: :delete, data: { confirm: 'Are you sure?'} do
+                  %i.fa.fa-trash
+            = render partial: 'modal', locals: { item: item }
+          = link_to '#', data: { target: '#new_item', toggle: :modal, placement: :bottom } do
+            %i.fa.fa-plus.right
+          = render partial: 'modal'
+      .paginator
+        = will_paginate @food, renderer: BootstrapPagination::Rails
+    - else
+      %p.warning No food!

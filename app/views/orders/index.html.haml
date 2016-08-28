@@ -1,0 +1,19 @@
+= content_for :plugins do
+  = javascript_include_tag 'orders'
+= content_for :styles do
+  = stylesheet_link_tag 'orders'
+
+.panel.panel-default
+  .panel-heading.orders-header
+    %h4 Order list
+    .right
+      %h5 Summary:
+      %h5.summary= Order.summary
+      %small UAH
+  .panel-body
+    .form-group.day-container
+      %label Select day
+      %input#day.form-control{type: 'text', data: { provide: 'datepicker', url: refresh_orders_path, 'date-format' => 'yyyy-mm-dd' }}
+    %hr
+    .orders-list
+      = render partial: 'orders/orders_list', locals: { orders: @orders }

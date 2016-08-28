@@ -1,0 +1,12 @@
+= content_for :plugins do
+  = javascript_include_tag 'items'
+
+%h4 First meals
+.well.well-lg.first_meals
+  = render partial: 'form', locals: { meals: Meal.up_to_date.first_meals, type: :first_meal }
+%h4 Main meals
+.well.well-lg.main_meals
+  = render partial: 'form', locals: { meals: Meal.up_to_date.main_meals, type: :main_meal }
+%h4 Drinks
+.well.well-lg.drinks
+  = render partial: 'form', locals: { meals: Meal.up_to_date.drinks, type: :drink }

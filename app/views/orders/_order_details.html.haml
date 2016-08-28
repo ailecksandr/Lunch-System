@@ -1,0 +1,28 @@
+.panel-body
+  .summ
+    .first_meal
+      .col-md-6
+        %h4 First Meal:
+      .col-md-6.text-right
+        %h3= order.first_meal.price
+        %small UAH
+    .main_meal
+      .col-md-6
+        %h4 Main Meal:
+      .col-md-6.text-right
+        %h3= order.main_meal.price
+        %small UAH
+    .drink
+      .col-md-6
+        %h4 Drink:
+      .col-md-6.text-right
+        %h3= order.drink.price
+        %small UAH
+    .col-md-12
+      %hr
+    .total
+      .col-md-6
+        %h4 Total:
+      .col-md-6.text-right
+        %h3= order.total
+        %small UAH

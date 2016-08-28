@@ -1,0 +1,7 @@
+- if !orders.empty?
+  - orders.each do |order|
+    .panel.order.panel-info{data: { url: order_details_path(id: order.id) }}
+      .panel-heading
+        = order.user.nickname
+- else
+  %h2 No orders at that day

@@ -1,20 +1,25 @@
 class ItemsController < ApplicationController
-  include SmartListing::Helper::ControllerExtensions
-  helper  SmartListing::Helper
-
-  load_and_authorize_resource
+  load_and_authorize_resource except: :create
   before_action :authenticate_user!
-  before_filter :find_item, only: :destroy
+  before_filter :find_item, except: :index
 
   def index
-    smart_listing_create :users,
-                         Item.all,
-                         partial: 'items/list',
-                         default_sort: { name: 'asc' }
+    @food = Item.all.order(:name).paginate(:page => params[:page], :per_page => 10)
   end
 
   def destroy
     @item.destroy
+    redirect_to items_path
+  end
+
+  def update
+    @item.update(item_params)
+    redirect_to items_path
+  end
+
+  def create
+    @item.save(item_params)
+    redirect_to items_path
   end
 
 
@@ -23,5 +28,9 @@ class ItemsController < ApplicationController
 
   def find_item
     @item = Item.find(params[:id])
+  end
+
+  def item_params
+    params.require(:item).permit(:name, :item_type)
   end
 end

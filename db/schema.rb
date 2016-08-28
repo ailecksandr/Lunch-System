@@ -10,15 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160828091259) do
+ActiveRecord::Schema.define(version: 20160830142801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "api_keys", force: :cascade do |t|
     t.string   "access_token"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "expired_at"
+    t.boolean  "static",       default: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "items", force: :cascade do |t|
@@ -48,8 +50,9 @@ ActiveRecord::Schema.define(version: 20160828091259) do
 
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "status",     default: "open"
     t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
   end
 
@@ -78,7 +81,6 @@ ActiveRecord::Schema.define(version: 20160828091259) do
     t.datetime "avatar_updated_at"
     t.string   "provider"
     t.string   "uid"
-    t.string   "token"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["nickname"], name: "index_users_on_nickname", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree

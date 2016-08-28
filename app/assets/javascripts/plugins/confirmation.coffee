@@ -10,8 +10,8 @@ $ ->
     link.trigger('click.rails')
     link.data('confirm', confirm)
   $.rails.showConfirmDialog = (link) ->
-    apply = if (link.data('apply') == undefined) then 'Підтвердити' else link.data('apply')
-    cancel = if (link.data('cancel') == undefined) then 'Відмінити' else link.data('cancel')
+    apply = if (link.data('apply') == undefined) then 'Accept' else link.data('apply')
+    cancel = if (link.data('cancel') == undefined) then 'Decline' else link.data('cancel')
     html = """
            <div class='modal custom fade' id='ModalConfirmation'>
              <div class='modal-dialog'>

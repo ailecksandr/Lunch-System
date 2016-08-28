@@ -8,6 +8,7 @@ Rails.application.config.assets.precompile += %w(
   items.sass
   menus.sass
   orders.sass
+  users.sass
 )
 
 # javascripts

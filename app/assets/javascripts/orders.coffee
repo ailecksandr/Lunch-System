@@ -14,6 +14,7 @@ $ ->
     $('.active .panel-body').remove()
     $(this).parent().siblings('.active').removeClass('active')
     $(this).parent().addClass('active')
+    $('.orders-list .inline-header .right:hidden').show()
     $(this).parent().find('.inline-header .right').hide()
     url = $(this).parent().data('url')
     $.ajax

@@ -1,2 +1,2 @@
 $('.orders-list').html("<%= escape_javascript(render partial: 'orders/orders_list', locals: { orders: @orders }) %>");
-$('.summary').html("<%= Order.summary(@date) %>");
+$('.date-summary').html("<%= Order.summary(@date) %>");

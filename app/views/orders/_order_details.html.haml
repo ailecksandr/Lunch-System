@@ -26,3 +26,7 @@
       .col-md-6.text-right
         %h3= order.total
         %small UAH
+    - if order.status?(:open)
+      .col-md-12
+        = link_to 'Close order', order_path(order, date: date), class: 'btn btn-danger right',
+            method: :delete, remote: true, data: { confirm: 'Close that order?'}

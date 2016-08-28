@@ -1,0 +1,10 @@
+= content_for :styles do
+  = stylesheet_link_tag 'users'
+
+.panel.panel-default
+  .panel-body
+    .access-token-container
+      .inner
+        .data
+          %h2 Your access token
+          = text_field_tag :access_token, @access_token, class: 'form-control'

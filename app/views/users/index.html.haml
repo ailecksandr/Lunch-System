@@ -1,8 +1,12 @@
+= content_for :styles do
+  = stylesheet_link_tag 'users'
+
 .panel.panel-default
   .panel-heading
     %h4 Users list
   .panel-body
     - @users.each do |user|
       .col-md-3
-        = image_tag user.avatar.url
-        = user.nickname
+        .user
+          = image_tag user.avatar.url, class: 'avatar'
+          = user.nickname

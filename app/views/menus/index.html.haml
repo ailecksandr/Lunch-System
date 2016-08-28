@@ -3,12 +3,12 @@
 = content_for :styles do
   = stylesheet_link_tag 'menus'
 
-- if user_signed_in?
+- if user_signed_in? && current_user.worker?
   - 7.times.each do |i|
     - date = (Time.now - i.days)
     .panel.menu{class: menu_class(i, date), data: { url: menu_details_path(date: date)}}
       .panel-heading
-        = date.strftime("%A %d, %B, %Y")
+        = date.strftime('%A %d, %B, %Y')
       - if i.zero?
         = render partial: 'menus/menu_details', locals: { date: date }
 - else

@@ -7,7 +7,7 @@
   .panel-heading
     %h4 Private Cabinet
   .panel-body
-    = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+    = form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: { :method => :put }) do |f|
       .col-md-6
         .form-group
           = f.label :nickname
@@ -17,14 +17,14 @@
         .file-field-container
           = f.file_field :avatar, accept: 'image/png, image/jpeg', placeholder: 'Change photo'
         = f.submit 'Update profile', class: 'btn btn-primary right'
-      - if resource.provider.blank?
-        .col-md-6
-          = label_tag 'Change password'
-          = form_for(@user, url: change_password_user_registration_path  ) do |f|
-            .form-group
-              = f.password_field :current_password, placeholder: 'Current password', class: 'form-control'
-            .form-group
-              = f.password_field :password, :autocomplete => 'off', placeholder: 'New password', class: 'form-control'
-            .form-group
-              = f.password_field :password_confirmation, placeholder: 'Password confirmation', class: 'form-control'
-            = f.submit 'Change password', class: 'btn btn-info right', data: { disable_with: 'Обробка...' }
+    - if can? :change_password, User
+      .col-md-6
+        = label_tag 'Change password'
+        = form_for(@user, url: change_password_user_registration_path) do |f|
+          .form-group
+            = f.password_field :current_password, placeholder: 'Current password', class: 'form-control'
+          .form-group
+            = f.password_field :password, :autocomplete => 'off', placeholder: 'New password', class: 'form-control'
+          .form-group
+            = f.password_field :password_confirmation, placeholder: 'Password confirmation', class: 'form-control'
+          = f.submit 'Change password', class: 'btn btn-info right', data: { disable_with: 'Обробка...' }

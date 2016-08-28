@@ -1,4 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
+  load_and_authorize_resource class: 'User', only: [:edit, :update, :change_password]
+
   def update
     if @user.update(account_update_params)
       redirect_to edit_user_registration_path, notice: 'Successfully changed'
@@ -10,7 +12,7 @@ class RegistrationsController < Devise::RegistrationsController
   def change_password
     @user = current_user
     if @user.update_with_password(password_params) && !password_params[:password].blank?
-      sign_in @user, bypass: true
+      bypass_sign_in @user
       flash[:notice] = 'Password has been changed successfully'
     else
       @user.errors.add(:password, t('activerecord.errors.models.user.attributes.password.blank')) if password_params[:password].blank?

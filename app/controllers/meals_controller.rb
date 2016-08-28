@@ -4,13 +4,13 @@ class MealsController < ApplicationController
   before_action :set_type
 
   def create
-    @meal = Meal.new(meals_params)
+    @meal = Meal.new(meal_params)
     @meal.save
     respond_to :js
   end
 
   def update
-    @meal = @meal.update(meals_params)
+    @meal = @meal.update(meal_params)
     respond_to :js
   end
 
@@ -27,7 +27,7 @@ class MealsController < ApplicationController
     @type = params[:type]
   end
 
-  def meals_params
+  def meal_params
     params.require(:meal).permit(:price, :item_id)
   end
 end

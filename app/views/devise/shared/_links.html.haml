@@ -2,9 +2,6 @@
   = link_to t(".sign_in", :default => "Sign in"), new_session_path(resource_name)
   %br/
 - if devise_mapping.registerable? && controller_name != 'registrations'
-  = link_to user_google_oauth2_omniauth_authorize_path do
-    %i.fa.fa-google-plus-square.google-signup
-  %br
   = link_to t('.sign_up', :default => 'Sign up'), new_registration_path(resource_name)
   %br/
 - if devise_mapping.recoverable? && controller_name != 'passwords'
@@ -16,3 +13,6 @@
 - if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks'
   = link_to t('.didn_t_receive_unlock_instructions', :default => "Didn't receive unlock instructions?"), new_unlock_path(resource_name)
   %br/
+- if devise_mapping.omniauthable? && controller_name != 'registrations'
+  = link_to user_google_oauth2_omniauth_authorize_path do
+    %i.fa.fa-google-plus-square.google-signup

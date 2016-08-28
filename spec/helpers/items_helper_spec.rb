@@ -1,15 +1,13 @@
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the ItemsHelper. For example:
-#
-# describe ItemsHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
-RSpec.describe ItemsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe ItemsHelper do
+  describe '#types_for_select' do
+    it { expect(types_for_select.size).to eq 3 }
+  end
+
+  describe '#humanize_type!' do
+    it { expect(humanize_type!(:drink)).to eq 'Drink' }
+    it { expect(humanize_type!(:main_meal)).to eq 'Main Meal' }
+    it { expect(humanize_type!(:first_meal)).to eq 'First Meal' }
+  end
 end

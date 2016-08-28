@@ -15,8 +15,9 @@ Devise.setup do |config|
   config.mailer_sender = 'lunches@gmail.com'
   config.omniauth :google_oauth2, ENV['GOOGLE_APP'], ENV['GOOGLE_SECRET'],
     {
-        access_type: "offline",
-        approval_prompt: "",
+        access_type: 'offline',
+        skip_jwt: true,
+        approval_prompt: '',
         :redirect_uri => 'http://localhost:3000/users/auth/google_oauth2/callback',
         setup: (lambda do |env|
           env['omniauth.strategy'].options['token_params'] = {:redirect_uri => 'http://localhost:3000/users/auth/google_oauth2/callback'}

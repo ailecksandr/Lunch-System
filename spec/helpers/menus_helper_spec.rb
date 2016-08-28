@@ -1,15 +1,26 @@
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the MenusHelper. For example:
-#
-# describe MenusHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
-RSpec.describe MenusHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe MenusHelper do
+  let(:first_item) { FactoryGirl.create(:first_item) }
+  let(:main_item) { FactoryGirl.create(:main_item) }
+  let(:drink_item) { FactoryGirl.create(:drink_item) }
+
+  describe '#items_for_select' do
+    it { expect(items_for_select(:first_meal)).to eq [first_item] }
+    it { expect(items_for_select(:main_meal)).to eq [main_item] }
+    it { expect(items_for_select(:drink)).to eq [drink_item] }
+  end
+
+  describe '#menu_class' do
+    it { expect(menu_class(0, Time.now)).to eq 'active panel-primary' }
+    it { expect(menu_class(1, Time.now)).to eq 'panel-default' }
+
+    context 'with completed menu' do
+      let!(:first_meal) { FactoryGirl.create(:meal, item: first_item) }
+      let!(:main_meal) { FactoryGirl.create(:meal, item: main_item) }
+      let!(:drink) { FactoryGirl.create(:meal, item: drink_item) }
+
+      it { expect(menu_class(1, Time.now)).to eq 'panel-info' }
+    end
+  end
 end

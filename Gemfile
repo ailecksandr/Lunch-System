@@ -44,7 +44,8 @@ gem 'bootstrap-select-rails'
 gem 'will_paginate-bootstrap'
 gem 'bootstrap_form'
 gem 'bootstrap-datepicker-rails'
-
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

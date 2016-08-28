@@ -1,7 +1,10 @@
 - if !orders.empty?
   - orders.each do |order|
     .panel.order.panel-info{data: { url: order_details_path(id: order.id) }}
-      .panel-heading
+      .panel-heading.inline-header
         = order.user.nickname
+        .right
+          %h5.summary= order.total
+          %small UAH
 - else
   %h2 No orders at that day

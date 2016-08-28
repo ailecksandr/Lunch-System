@@ -10,9 +10,9 @@
         %td.actions
           = link_to '#', data: { target: "#meals_#{meal.id}", toggle: :modal, placement: :bottom } do
             %i.fa.fa-pencil
-          -#TODO just if not related
-          = link_to meal_path(meal, type: type), method: :delete, remote: true, data: { confirm: 'Are you sure?'} do
-            %i.fa.fa-trash
+          - if Order.joins(:menu_items).limit(1).where(menu_items: { meal: meal }).empty?
+            = link_to meal_path(meal, type: type), method: :delete, remote: true, data: { confirm: 'Are you sure?'} do
+              %i.fa.fa-trash
       = render partial: 'menus/modal', locals: { meal: meal, type: type }
     = link_to '#', data: { target: "#new_#{type}", toggle: :modal, placement: :bottom } do
       %i.fa.fa-plus.right

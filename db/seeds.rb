@@ -1,4 +1,5 @@
 DAYS = %w(Sunday Monday Tuesday Wednesday Thursday Friday Saturday)
+ApiKey.create(access_token: '1234')
 
 Item.create(
     [

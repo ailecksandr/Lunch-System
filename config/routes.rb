@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   root 'menus#index'
 
-  devise_for :users, controllers: { registrations: 'registrations' }
+  devise_for :users, controllers: {
+      registrations: 'registrations',
+      omniauth_callbacks: 'omniauth_callbacks'
+  }
   devise_scope :user do
     patch 'registrations/change_password', to: 'registrations#change_password', as: :change_password_user_registration
   end
@@ -15,4 +18,10 @@ Rails.application.routes.draw do
   resources :orders
   get 'order_details', to: 'orders#order_details', as: :order_details
   get 'refresh_orders', to: 'orders#refresh_orders', as: :refresh_orders
+
+  namespace :api do
+    namespace :v1 do
+      resources :orders, only: :index
+    end
+  end
 end

@@ -5,7 +5,7 @@ class Order < ApplicationRecord
   belongs_to :user
 
   [:first_meal, :main_meal, :drink].each do |name|
-    define_method name, -> { self.menu_items.joins(meal: :item).where(items: { item_type: :drink }).first.meal }
+    define_method name, -> { self.menu_items.joins(meal: :item).where(items: { item_type: name }).first.meal }
   end
 
   def total

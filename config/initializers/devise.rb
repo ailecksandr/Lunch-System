@@ -13,6 +13,16 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   config.mailer_sender = 'lunches@gmail.com'
+  config.omniauth :google_oauth2, ENV['GOOGLE_APP'], ENV['GOOGLE_SECRET'],
+    {
+        access_type: "offline",
+        approval_prompt: "",
+        :redirect_uri => 'http://localhost:3000/users/auth/google_oauth2/callback',
+        setup: (lambda do |env|
+          env['omniauth.strategy'].options['token_params'] = {:redirect_uri => 'http://localhost:3000/users/auth/google_oauth2/callback'}
+        end)
+    }
+
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -177,7 +187,7 @@ Devise.setup do |config|
 
   # Defines which strategy will be used to unlock an account.
   # :email = Sends an unlock link to the user email
-  # :time  = Re-enables login after a certain amount of time (see :unlock_in below)
+  # :time  = Re-enables new after a certain amount of time (see :unlock_in below)
   # :both  = Enables both strategies
   # :none  = No unlock strategy. You should handle unlocking by yourself.
   # config.unlock_strategy = :both

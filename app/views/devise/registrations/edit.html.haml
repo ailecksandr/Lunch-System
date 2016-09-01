@@ -7,7 +7,7 @@
   .panel-heading
     %h4 Private Cabinet
   .panel-body
-    = form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: { :method => :put }) do |f|
+    = form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: { :method => :put, multipart: true }) do |f|
       .col-md-6
         .form-group
           = f.label :nickname

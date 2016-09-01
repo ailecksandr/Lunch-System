@@ -24,7 +24,10 @@ RSpec.configure do |config|
   config.include Paperclip::Shoulda::Matchers
   config.include Devise::Test::ControllerHelpers, type: :controller
 
-  config.before { allow_any_instance_of(Paperclip::Attachment).to receive(:save).and_return(true) }
+  config.before do
+    allow_any_instance_of(Paperclip::Attachment).to receive(:save).and_return(true)
+    allow_any_instance_of(AmazonModule).to receive(:clear_s3_object).and_return(nil)
+  end
 
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = true

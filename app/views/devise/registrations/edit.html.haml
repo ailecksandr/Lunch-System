@@ -13,7 +13,7 @@
           = f.label :nickname
           = f.text_field :nickname, autofocus: true, class: 'form-control'
         .avatar.form-group
-          = image_tag resource.avatar.url, class: 'img-thumbnail'
+          = image_tag resource.avatar.path, class: 'img-thumbnail'
         .file-field-container
           = f.file_field :avatar, accept: 'image/png, image/jpeg', placeholder: 'Change photo'
         = f.submit 'Update profile', class: 'btn btn-primary right'

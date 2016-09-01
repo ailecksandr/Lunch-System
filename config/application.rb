@@ -10,5 +10,6 @@ module JetRubyTest
   class Application < Rails::Application
     config.active_record.default_timezone = :local
     config.time_zone = 'Kyiv'
+    config.autoload_paths += %W(#{config.root}/lib)
   end
 end

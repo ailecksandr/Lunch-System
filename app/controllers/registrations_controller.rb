@@ -1,7 +1,11 @@
 class RegistrationsController < Devise::RegistrationsController
+  include AmazonModule
+
   load_and_authorize_resource class: 'User', only: [:edit, :update, :change_password]
 
   def update
+    clear_s3_object(@user.avatar) unless @user.avatar.size.nil? || account_update_params['avatar'].nil?
+
     if @user.update(account_update_params)
       redirect_to edit_user_registration_path, notice: 'Successfully changed'
     else

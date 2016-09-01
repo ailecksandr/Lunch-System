@@ -18,9 +18,9 @@ Devise.setup do |config|
         access_type: 'offline',
         skip_jwt: true,
         approval_prompt: '',
-        :redirect_uri => 'http://localhost:3000/users/auth/google_oauth2/callback',
+        :redirect_uri => 'http://jet-ruby-test.herokuapp.com/users/auth/google_oauth2/callback',
         setup: (lambda do |env|
-          env['omniauth.strategy'].options['token_params'] = {:redirect_uri => 'http://localhost:3000/users/auth/google_oauth2/callback'}
+          env['omniauth.strategy'].options['token_params'] = {:redirect_uri => 'http://jet-ruby-test.herokuapp.com/users/auth/google_oauth2/callback'}
         end)
     }
 

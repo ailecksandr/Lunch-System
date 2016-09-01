@@ -317,7 +317,7 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_print
-  aws-sdk (~> 2.3)
+  aws-sdk (~> 2)
   bootstrap-datepicker-rails
   bootstrap-filestyle-rails
   bootstrap-sass (~> 3.3.6)

@@ -7,7 +7,7 @@ Rails.application.configure do
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
 
-  config.action_mailer.default_url_options = { host: 'http://jet-ruby-test.herokuapp.com/' }
+  config.action_mailer.default_url_options = { host: 'https://jet-ruby-test.herokuapp.com/' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = false
@@ -25,11 +25,11 @@ Rails.application.configure do
 
   config.paperclip_defaults = {
       storage: :s3,
+      bucket: ENV['S3_BUCKET_NAME'],
       s3_credentials: {
-          bucket: ENV.fetch('S3_BUCKET_NAME'),
-          access_key_id: ENV.fetch('AWS_ACCESS_KEY_ID'),
-          secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY'),
-          s3_region: ENV.fetch('AWS_REGION'),
+          access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+          secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
+          s3_region: ENV['AWS_REGION'],
       }
   }
 

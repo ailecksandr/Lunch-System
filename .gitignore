@@ -15,6 +15,7 @@
 /config/database.yml
 .idea
 .rspec
+coverage
 
 # Ignore Byebug command history file.
 .byebug_history

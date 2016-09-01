@@ -24,6 +24,8 @@ RSpec.configure do |config|
   config.include Paperclip::Shoulda::Matchers
   config.include Devise::Test::ControllerHelpers, type: :controller
 
+  config.before { allow_any_instance_of(Paperclip::Attachment).to receive(:save).and_return(true) }
+
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = true
   config.infer_spec_type_from_file_location!

@@ -1,0 +1,13 @@
+/* line 3, /home/notebook/RubymineProjects/JetRubyTest/app/assets/stylesheets/forms.sass */
+.panel-body .form-group .avatar {
+  text-align: center;
+}
+/* line 5, /home/notebook/RubymineProjects/JetRubyTest/app/assets/stylesheets/forms.sass */
+.panel-body .form-group .avatar img {
+  width: 35%;
+  margin: 20px 0;
+}
+/* line 8, /home/notebook/RubymineProjects/JetRubyTest/app/assets/stylesheets/forms.sass */
+.panel-body .file-field-container {
+  margin: 15px 0 !important;
+}

@@ -1,0 +1,42 @@
+/* line 2, /home/notebook/RubymineProjects/JetRubyTest/app/assets/stylesheets/orders.sass */
+.inline-header h5, .inline-header h4 {
+  display: inline !important;
+}
+/* line 4, /home/notebook/RubymineProjects/JetRubyTest/app/assets/stylesheets/orders.sass */
+.inline-header .summary {
+  font-weight: bold !important;
+}
+
+/* line 6, /home/notebook/RubymineProjects/JetRubyTest/app/assets/stylesheets/orders.sass */
+.day-container {
+  width: 30%;
+  margin: 0 auto;
+}
+/* line 9, /home/notebook/RubymineProjects/JetRubyTest/app/assets/stylesheets/orders.sass */
+.day-container #day {
+  cursor: pointer;
+}
+
+/* line 11, /home/notebook/RubymineProjects/JetRubyTest/app/assets/stylesheets/orders.sass */
+h2 {
+  text-align: center;
+  color: #ccc;
+  margin: 50px;
+}
+
+/* line 16, /home/notebook/RubymineProjects/JetRubyTest/app/assets/stylesheets/orders.sass */
+.order .panel-heading {
+  cursor: pointer;
+}
+/* line 18, /home/notebook/RubymineProjects/JetRubyTest/app/assets/stylesheets/orders.sass */
+.order .col-md-6 {
+  margin: 15px auto;
+}
+/* line 20, /home/notebook/RubymineProjects/JetRubyTest/app/assets/stylesheets/orders.sass */
+.order h1, .order .total h3 {
+  font-weight: bold;
+}
+/* line 22, /home/notebook/RubymineProjects/JetRubyTest/app/assets/stylesheets/orders.sass */
+.order h4, .order h3 {
+  display: inline;
+}

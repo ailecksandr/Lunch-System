@@ -1,0 +1,37 @@
+/* line 2, /home/notebook/RubymineProjects/JetRubyTest/app/assets/stylesheets/menus.sass */
+.menu .panel-heading {
+  cursor: pointer;
+}
+/* line 4, /home/notebook/RubymineProjects/JetRubyTest/app/assets/stylesheets/menus.sass */
+.menu h1 {
+  font-weight: bold;
+}
+/* line 6, /home/notebook/RubymineProjects/JetRubyTest/app/assets/stylesheets/menus.sass */
+.menu h2 {
+  text-align: center;
+  color: #ccc;
+  margin: 50px;
+}
+/* line 10, /home/notebook/RubymineProjects/JetRubyTest/app/assets/stylesheets/menus.sass */
+.menu .summ {
+  width: 30%;
+  float: right;
+  text-align: center;
+}
+/* line 14, /home/notebook/RubymineProjects/JetRubyTest/app/assets/stylesheets/menus.sass */
+.menu .summ .first_meal, .menu .summ .main_meal, .menu .summ .drink {
+  margin: 10px 0;
+}
+/* line 17, /home/notebook/RubymineProjects/JetRubyTest/app/assets/stylesheets/menus.sass */
+.menu .summ .total h3 {
+  font-weight: bold;
+}
+/* line 19, /home/notebook/RubymineProjects/JetRubyTest/app/assets/stylesheets/menus.sass */
+.menu .summ h4, .menu .summ h3 {
+  display: inline;
+}
+/* line 21, /home/notebook/RubymineProjects/JetRubyTest/app/assets/stylesheets/menus.sass */
+.menu input[type=submit] {
+  width: 200px;
+  font-size: 28px;
+}

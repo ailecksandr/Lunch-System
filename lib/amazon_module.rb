@@ -1,9 +1,6 @@
 module AmazonModule
-  require 'aws-sdk-v1'
-  require 'aws-sdk'
-
   def s3_bucket
-    s3 = AWS::S3::Client.new(access_key_id: ENV['AWS_ACCESS_KEY_ID'], secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'])
+    s3 = Aws::S3::Client.new(region: ENV['AWS_REGION'])
     s3.buckets['jet-ruby-test']
   end
 

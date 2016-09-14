@@ -48,7 +48,6 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'timecop'
   gem 'simplecov'
-  gem 'parallel_tests'
   gem 'faker'
 end
 

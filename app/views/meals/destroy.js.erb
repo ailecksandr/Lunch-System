@@ -1,4 +1,4 @@
 setTimeout(function(){
-  var selector = "<%= ".#{@type}s" %>";
-  $(selector).html("<%= escape_javascript(render partial: 'menus/form', locals: { meals: Meal.up_to_date.send("#{@type}s"), type: @type }) %>");
+  var selector = "<%= ".#{@type}s tbody" %>";
+  $(selector).html("<%= escape_javascript(render partial: 'meals/meals', locals: { meals: Meal.up_to_date.send(@type), type: @type }) %>");
 }, 200);

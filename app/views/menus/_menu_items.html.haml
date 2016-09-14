@@ -11,5 +11,6 @@
         %small UAH
       - if defined?(f)
         %td.actions
-          = f.radio_button "#{meal.item.item_type}", meal.id, checked: false, class: 'radio',
-            data: { type: meal.item.item_type, price: meal.price }
+          = f.fields_for MenuItem.new do |ff|
+            = ff.radio_button :meal_id, meal.id, name: "order[menu_items_attributes][#{menu_item_index(type)}][meal_id]",
+                              class: 'radio', checked: false, data: { type: meal.item.item_type, price: meal.price }

@@ -1,6 +1,10 @@
 $ ->
-  $('#day')
-  .datepicker().datepicker("setDate", new Date())
+  $('#day').datepicker({
+    daysOfWeekDisabled: [0,6],
+    todayHighlight: true,
+    autoclose: true
+  })
+  .datepicker('setDate', new Date())
   .on 'change', ->
     url = $(this).data('url')
     $.ajax

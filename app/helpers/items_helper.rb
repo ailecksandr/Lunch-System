@@ -1,17 +1,9 @@
 module ItemsHelper
   def types_for_select
-    [
-      ['First Meal', 'first_meal'],
-      ['Main Meal', 'main_meal'],
-      %w(Drink drink)
-    ]
+    Item.item_types.keys.map{|type| [humanize_type!(type), type] }
   end
 
   def humanize_type!(type)
-    case type.to_s
-    when 'drink' then 'Drink'
-    when 'main_meal' then 'Main Meal'
-    when 'first_meal' then 'First Meal'
-    end
+    type.to_s.split('_').map(&:capitalize).join(' ')
   end
 end

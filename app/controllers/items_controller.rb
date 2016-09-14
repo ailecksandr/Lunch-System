@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   before_action :find_item, except: [:index, :create]
 
   def index
-    @food = Item.all.order(:name).paginate(:page => params[:page], :per_page => 10)
+    @food = Item.all.order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
   end
 
   def destroy
@@ -14,21 +14,21 @@ class ItemsController < ApplicationController
 
   def update
     if @item.update(item_params)
-      redirect_to items_path, notice: 'Successfully updated'
+      flash[:notice] = 'Successfully updated'
     else
       flash[:danger] = 'Incorrect data'
-      redirect_to items_path
     end
+    redirect_to items_path
   end
 
   def create
     @item = Item.new(item_params)
     if @item.save
-      redirect_to items_path, notice: 'Successfully added'
+      flash[:notice] = 'Successfully added'
     else
       flash[:danger] = 'Incorrect data'
-      redirect_to items_path
     end
+    redirect_to items_path
   end
 
 

@@ -7,3 +7,4 @@
 #= require bootstrap-select
 #= require plugins/confirmation
 #= require bootstrap-datepicker
+#= require jquery_nested_form

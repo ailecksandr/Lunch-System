@@ -22,7 +22,7 @@ describe OrdersController do
 
     describe '#create' do
       context 'success' do
-        before { @proc = -> { post :create, params: { order: { first_meal: meal.id, main_meal: main_meal.id, drink: drink.id } } } }
+        before { @proc = -> { post :create, params: { order: { user_id: user.id, menu_items_attributes: { 1 => { meal_id: meal.id }, 2 => { meal_id: main_meal.id }, 3 => { meal_id: drink.id } } } } } }
 
         it { expect{ @proc.call }.to change(Order, :count).by(1) }
         it { expect{ @proc.call }.to change(MenuItem, :count).by(3) }
@@ -31,7 +31,7 @@ describe OrdersController do
       end
 
       context 'error' do
-        before { @proc = -> { post :create, params: { order: { drink: :kek } } } }
+        before { @proc = -> { post :create, params: { order: { user_id: user } } } }
 
         it { expect{ @proc.call }.not_to change(Order, :count) }
         it { expect{ @proc.call }.not_to change(MenuItem, :count) }
@@ -56,17 +56,17 @@ describe OrdersController do
       it { expect(response).to render_template(:order_details) }
     end
 
-    describe '#order_details' do
+    describe '#refresh_orders' do
       before { @proc = -> (date = nil){ get :refresh_orders, format: :js, params: { date: date } } }
 
-      it { @proc.call(Time.now - 1.day); expect(assigns(:orders)).to eq [previous_order] }
+      it { @proc.call(working_days_ago(1)); expect(assigns(:orders)).to eq [previous_order] }
       it { @proc.call; expect(assigns(:orders)).to match_array(orders) }
     end
 
     describe '#destroy' do
-      before { @proc = -> { delete :destroy, format: :js, params: { id: order.id, date: Time.now - 1.day } } }
+      before { @proc = -> { delete :destroy, format: :js, params: { id: order.id, date: working_days_ago(1) } } }
 
-      it { expect{ @proc.call }.to change{ Order.where(status: 'closed').size }.by(1) }
+      it { expect{ @proc.call }.to change{ Order.closed.size }.by(1) }
       it { expect(@proc.call).to render_template(:refresh_orders) }
       it { @proc.call; expect(assigns(:orders)).to eq [previous_order] }
     end

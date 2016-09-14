@@ -1,6 +1,6 @@
 - if !orders.empty?
   - orders.each do |order|
-    .panel.order{data: { url: order_details_path(id: order.id, date: @date) }, class: "panel-#{order.status?(:open) ? 'info' : 'danger'}" }
+    .panel.order{data: { url: order_details_path(id: order.id, date: @date) }, class: "panel-#{order.open? ? 'info' : 'danger'}" }
       .panel-heading.inline-header
         = order.user.nickname
         .right

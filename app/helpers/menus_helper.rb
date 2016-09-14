@@ -1,15 +1,15 @@
 module MenusHelper
-  def items_for_select(type)
-    Item.send("#{type}s")
+  include WorkingDayseable
+
+  def menu_class(date)
+    case
+    when date.today? then 'active panel-primary'
+    when Meal.menu_completed?(date) then 'panel-info'
+    else 'panel-default'
+    end
   end
 
-  def menu_class(index, date)
-    if index.zero?
-      'active panel-primary'
-    elsif Meal.menu_completed?(date)
-      'panel-info'
-    else
-      'panel-default'
-    end
+  def menu_item_index(type)
+    (MenuItem.last.id rescue 0) + Item.item_types[type] + 1
   end
 end

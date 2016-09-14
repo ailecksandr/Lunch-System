@@ -15,6 +15,5 @@ Rails.application.config.assets.precompile += %w(
 Rails.application.config.assets.precompile += %w(
   plugins/file-field.coffee
   menus.coffee
-  items.coffee
   orders.coffee
 )

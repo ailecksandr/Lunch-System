@@ -1,11 +1,11 @@
 class ApiKey < ApplicationRecord
-  scope :actual, -> { where('expired_at >= NOW()') }
+  scope :actual, -> { where('expired_at >= ?', Time.now) }
   scope :static, -> { where(static: true) }
-  scope :active, -> { where('expired_at >= NOW() OR static = true') }
-  scope :inactive, -> { where('expired_at < NOW() AND static = false') }
+  scope :active, -> { where('expired_at >= ? OR static = true', Time.now) }
+  scope :inactive, -> { where('expired_at < ? AND static = false', Time.now) }
 
   before_create do
-    self.expired_at = Time.now + 15.minutes if self.expired_at.blank?
+    self.expired_at = 15.minutes.from_now if self.expired_at.blank?
     generate_access_token! if self.access_token.blank?
   end
 

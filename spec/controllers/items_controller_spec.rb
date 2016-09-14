@@ -54,7 +54,7 @@ describe ItemsController do
       end
 
       context 'error' do
-        before { @proc = -> { patch :update, params: { id: first_item.id, item: FactoryGirl.attributes_for(:first_item, item_type: :kek) } } }
+        before { @proc = -> { patch :update, params: { id: first_item.id, item: FactoryGirl.attributes_for(:first_item, item_type: nil) } } }
 
         it { @proc.call; expect(first_item.reload.item_type).to eq 'first_meal' }
         it { @proc.call; expect(controller).to set_flash[:danger].to('Incorrect data') }

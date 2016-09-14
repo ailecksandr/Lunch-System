@@ -1,5 +1,3 @@
-= content_for :plugins do
-  = javascript_include_tag 'items'
 = content_for :styles do
   = stylesheet_link_tag 'items'
 
@@ -18,16 +16,17 @@
               %td= item.name
               %td= humanize_type!(item.item_type)
               %td.actions
-                = link_to '#', data: { target: "#items_#{item.id}", toggle: :modal, placement: :bottom } do
+                = link_to render_modal_path(item: item, purpose: :items), remote: true do
                   %i.fa.fa-pencil
                 - if Meal.limit(1).where(item: item).empty?
                   = link_to item_path(item), method: :delete, data: { confirm: 'Are you sure?'} do
                     %i.fa.fa-trash
-            = render partial: 'modal', locals: { item: item }
-          = link_to '#', data: { target: '#new_item', toggle: :modal, placement: :bottom } do
+          = link_to render_modal_path(purpose: :items), remote: true do
             %i.fa.fa-plus.right
-          = render partial: 'modal'
+          .modal.fade{ id: 'items-action', 'aria-hidden': true, 'aria-labelledby': :myModalLabel, role: :dialog, tabindex: '-1' }
+            .modal-dialog
+              .modal-content
       .paginator
-        = will_paginate @food, renderer: BootstrapPagination::Rails
+        = will_paginate @food, renderer: BootstrapPagination::Rails, remote: true
     - else
       %p.warning No food!

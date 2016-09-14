@@ -5,7 +5,7 @@ describe Api::V1::OrdersController do
 
   let(:api_key) { FactoryGirl.create(:api_key) }
   let(:inactive_key) { FactoryGirl.create(:inactive_key) }
-  let(:order) { FactoryGirl.create(:completed_order) }
+  let(:order) { FactoryGirl.create(:order) }
   let(:previous_order) { FactoryGirl.create(:previous_order) }
   let(:orders) { [order, previous_order] }
   let(:response_body) { JSON.parse(response.body) }
@@ -27,7 +27,7 @@ describe Api::V1::OrdersController do
         end
 
         context 'yesterday' do
-          before { @proc.call(api_key.access_token, Time.now - 1.day) }
+          before { @proc.call(api_key.access_token, working_days_ago(1)) }
 
           it { expect(response_body.size).to eq 1 }
           it { expect(response_body[0]['id']).to eq previous_order.id }

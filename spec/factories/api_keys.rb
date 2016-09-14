@@ -3,11 +3,11 @@ FactoryGirl.define do
 
   factory :custom_key, parent: :api_key do
     access_token '1234'
-    expired_at Time.now + 1.minutes
+    expired_at { 1.minutes.from_now }
   end
 
   factory :inactive_key, parent: :api_key do
-    expired_at Time.now - 1.minutes
+    expired_at { 1.minutes.ago }
   end
 
   factory :static_key, parent: :inactive_key do

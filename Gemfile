@@ -39,6 +39,7 @@ gem 'bootstrap_form'
 gem 'bootstrap-datepicker-rails'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
+gem 'nested_form'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

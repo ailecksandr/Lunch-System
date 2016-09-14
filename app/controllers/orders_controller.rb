@@ -6,24 +6,9 @@ class OrdersController < ApplicationController
   before_action :get_date, only: [:refresh_orders, :destroy, :order_details]
 
   def create
-    begin
-      @order = Order.new(order_params)
-      first_meal = Meal.find(params[:order][:first_meal])
-      main_meal = Meal.find(params[:order][:main_meal])
-      drink = Meal.find(params[:order][:drink])
-      @order.save
-      @order.menu_items.create(
-          [
-              { meal: first_meal },
-              { meal: main_meal },
-              { meal: drink }
-          ]
-      )
-    rescue
-      @error = true
-    end
+    @order = Order.new(order_params)
 
-    if !@error
+    if @order.save
       flash[:success] = 'Successfully ordered'
     else
       flash[:danger] = 'Choose all meals'
@@ -58,7 +43,7 @@ class OrdersController < ApplicationController
 
 
   def order_params
-    params.require(:order).permit(:user_id)
+    params.require(:order).permit(:user_id, menu_items_attributes: [:id, :meal_id])
   end
 
   def get_date

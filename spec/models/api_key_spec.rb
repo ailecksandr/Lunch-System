@@ -6,16 +6,13 @@ describe ApiKey do
   let(:static_key) { FactoryGirl.create(:static_key) }
   let(:inactive_key) { FactoryGirl.create(:inactive_key) }
 
-  before { Timecop.freeze }
-  after { Timecop.return }
-
   context 'scopes' do
     before do
       api_key
       custom_key
       static_key
-
     end
+
     it { expect(ApiKey.actual).to eq [api_key, custom_key] }
     it { expect(ApiKey.static).to eq [static_key] }
     it { expect(ApiKey.active).to eq [api_key, custom_key, static_key] }

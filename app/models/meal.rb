@@ -4,11 +4,12 @@ class Meal < ApplicationRecord
   belongs_to :item
   has_many :menu_items, dependent: :destroy
   has_many :orders, through: :menu_items
-  validates :price, presence: true, numericality: { greater_than_or_equal_to: 1.0, less_than_or_equal_to: 100.0 }
+  validates :price, presence: true, numericality: { greater_than_or_equal_to: 1.0, less_than_or_equal_to: 500.0 }
   validates :item_id, presence: true
   scope :sorted, -> { joins(:item).order('meals.price, items.name')}
-  Item::TYPES.each do |type|
-    scope "#{type}s", -> { joins(:item).where(items: { item_type: type }).sorted }
+
+  Item.item_types.keys.each do |type|
+    scope type, -> { joins(:item).where(items: { item_type: Item.item_types[type] }).sorted }
   end
 
   def self.menu_completed?(date = Time.now)

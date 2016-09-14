@@ -16,6 +16,6 @@ FactoryGirl.define do
 
   factory :user_from_social, parent: :user do
     provider :google
-    uid Faker::Number.number(21)
+    uid { Faker::Number.number(21) }
   end
 end

@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  ROLES = %w(user admin system)
+  enum role: %w(user admin system)
 
   has_many :orders, dependent: :destroy
   devise :database_authenticatable, :registerable,
@@ -9,23 +9,12 @@ class User < ApplicationRecord
   has_attached_file :avatar, default_url: 'missing-avatar.png'
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
   validates :nickname, presence: true, length: { in: 3..25 }, uniqueness: true
-  validates :role, presence: true, inclusion: { in: ROLES }
+
   scope :confirmed, -> { where.not(confirmed_at: nil) }
-  scope :workers, -> { where.not(role: 'system') }
-  ROLES.each do |role|
-    scope "#{role}s", -> { where(role: role) }
-  end
+  scope :worker, -> { where.not(role: 'system') }
 
   def after_confirmation
     self.update(role: 'admin') if User.confirmed.size == 1
-  end
-
-  def role?(role)
-    self.role == role.to_s
-  end
-
-  def worker?
-    self.role != 'system'
   end
 
   def self.find_for_google_oauth2(response)

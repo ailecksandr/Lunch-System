@@ -16,6 +16,7 @@
 .idea
 .rspec
 coverage
+public/system
 
 # Ignore Byebug command history file.
 .byebug_history

@@ -16,6 +16,9 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
+  config.before { Timecop.freeze(DateTime.new(2016, 9, 14, 1, 2, 3)) }
+  config.after { Timecop.return }
+
   config.mock_with :rspec do |mocks|
     mocks.verify_partial_doubles = true
   end

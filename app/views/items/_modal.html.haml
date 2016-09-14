@@ -1,16 +1,11 @@
-.modal.fade{ id: defined?(item) ? "items_#{item.id}" : 'new_item', 'aria-hidden': true, 'aria-labelledby': :myModalLabel, role: :dialog, tabindex: '-1' }
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %h4.modal-title= defined?(item) ? 'Editing item' : 'Creating item'
-      = form_for defined?(item)? item : Item.new do |f|
-        .modal-body
-          .form-group
-            = f.label :name
-            = f.text_field :name, autofocus: true, class: 'form-control'
-          .form-group
-            = f.label :item_type
-            = f.select :item_type, options_for_select(types_for_select, selected: defined?(item)? item.item_type : ''), { include_blank: '<Nothing is selected>'}
-        .modal-footer
-          .actions
-            = f.submit 'OK', class: ' btn btn-shadow btn-info confirm', data: { disable_with: 'Обробка...' }
+.modal-header
+  %h4.modal-title= item.present? ? 'Editing item' : 'Creating item'
+= bootstrap_form_for item.present? ? item : Item.new do |f|
+  .modal-body
+    .form-group
+      = f.text_field :name, autofocus: true, class: 'form-control'
+    .form-group
+      = f.select :item_type, options_for_select(types_for_select, selected: item.present? ? item.item_type : ''), { include_blank: '<Nothing is selected>'}
+  .modal-footer
+    .actions
+      = f.submit 'OK', class: ' btn btn-shadow btn-info confirm', data: { disable_with: 'Обробка...' }

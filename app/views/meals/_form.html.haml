@@ -1,0 +1,9 @@
+%table.table.table-striped
+  %thead
+    %th.col-md-6 Name
+    %th.col-md-6 Price
+  %tbody
+    = render partial: 'meals/meals', locals: { meals: meals, type: type }
+
+    = link_to render_modal_path(type: type, purpose: :meals), remote: true do
+      %i.fa.fa-plus.right

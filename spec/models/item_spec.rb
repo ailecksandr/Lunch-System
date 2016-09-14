@@ -9,7 +9,7 @@ describe Item do
     it { expect(item).to validate_presence_of(:name) }
     it { expect(item).to validate_length_of(:name).is_at_least(4).is_at_most(30) }
     it { expect(item).to validate_presence_of(:item_type) }
-    it { expect(item).to validate_inclusion_of(:item_type).in_array(Item::TYPES) }
+    it { is_expected.to define_enum_for(:item_type).with(Item.item_types.keys) }
   end
 
   context 'relations' do
@@ -23,8 +23,8 @@ describe Item do
       drink_item
     end
 
-    it { expect(Item.first_meals).to eq [item] }
-    it { expect(Item.main_meals).to eq [main_item] }
-    it { expect(Item.drinks).to eq [drink_item] }
+    it { expect(Item.first_meal).to eq [item] }
+    it { expect(Item.main_meal).to eq [main_item] }
+    it { expect(Item.drink).to eq [drink_item] }
   end
 end

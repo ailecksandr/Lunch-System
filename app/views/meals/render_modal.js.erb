@@ -1,0 +1,2 @@
+$('#meals-action .modal-content').html("<%= escape_javascript(render partial: 'meals/modal', locals: { meal: @meal, type: @type }) %>");
+$('#meals-action').modal();

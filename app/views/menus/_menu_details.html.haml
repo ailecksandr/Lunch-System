@@ -1,10 +1,10 @@
 .panel-body
   - if Meal.menu_completed?(date)
     - if date.beginning_of_day == Time.now.beginning_of_day
-      = form_for Order.new do |f|
-        = render partial: 'menus/menu_items', locals: { meals: Meal.up_to_date(date).first_meals, type: :first_meal, f: f }
-        = render partial: 'menus/menu_items', locals: { meals: Meal.up_to_date(date).main_meals, type: :main_meal, f: f }
-        = render partial: 'menus/menu_items', locals: { meals: Meal.up_to_date(date).drinks, type: :drink, f: f }
+      = nested_form_for Order.new do |f|
+        = render partial: 'menus/menu_items', locals: { meals: Meal.up_to_date(date).first_meal, type: :first_meal, f: f }
+        = render partial: 'menus/menu_items', locals: { meals: Meal.up_to_date(date).main_meal, type: :main_meal, f: f }
+        = render partial: 'menus/menu_items', locals: { meals: Meal.up_to_date(date).drink, type: :drink, f: f }
         = f.hidden_field :user_id, value: current_user.id
         %hr
         .summ
@@ -38,8 +38,8 @@
         %hr
         = f.submit 'Order', class: 'btn btn-danger right'
     - else
-      = render partial: 'menus/menu_items', locals: { meals: Meal.up_to_date(date).first_meals, type: :first_meal }
-      = render partial: 'menus/menu_items', locals: { meals: Meal.up_to_date(date).main_meals, type: :main_meal }
-      = render partial: 'menus/menu_items', locals: { meals: Meal.up_to_date(date).drinks, type: :drink }
+      = render partial: 'menus/menu_items', locals: { meals: Meal.up_to_date(date).first_meal, type: :first_meal }
+      = render partial: 'menus/menu_items', locals: { meals: Meal.up_to_date(date).main_meal, type: :main_meal }
+      = render partial: 'menus/menu_items', locals: { meals: Meal.up_to_date(date).drink, type: :drink }
   - else
     %h2 No menu for that day

@@ -161,6 +161,7 @@ GEM
     multi_json (1.12.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
+    nested_form (0.3.2)
     nio4r (1.2.1)
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
@@ -334,6 +335,7 @@ DEPENDENCIES
   jquery-rails
   json_spec
   listen (~> 3.0.5)
+  nested_form
   omniauth
   omniauth-google-oauth2
   paperclip

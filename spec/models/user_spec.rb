@@ -11,8 +11,7 @@ describe User do
     it { expect(user).to validate_uniqueness_of(:nickname) }
     it { expect(user).to validate_length_of(:nickname).is_at_least(3).is_at_most(25) }
     it { expect(user).to validate_presence_of(:email) }
-    it { expect(user).to validate_presence_of(:role) }
-    it { expect(user).to validate_inclusion_of(:role).in_array(User::ROLES) }
+    it { is_expected.to define_enum_for(:role).with(User.roles.keys) }
     it { expect(user).to have_attached_file(:avatar) }
     it { expect(user).to validate_attachment_content_type(:avatar).allowing('image/*').rejecting('text/plain') }
   end
@@ -30,26 +29,16 @@ describe User do
     end
 
     it { expect(User.confirmed).to match_array User.all }
-    it { expect(User.workers).to match_array User.all - [api_client] }
-    it { expect(User.users).to match_array User.all - [admin, api_client] }
-    it { expect(User.admins).to eq [admin] }
-    it { expect(User.systems).to eq [api_client] }
+    it { expect(User.worker).to match_array User.all - [api_client] }
+    it { expect(User.user).to match_array User.all - [admin, api_client] }
+    it { expect(User.admin).to eq [admin] }
+    it { expect(User.system).to eq [api_client] }
   end
 
   context 'methods' do
     describe '#after_confirmation' do
-      it { expect{ user.after_confirmation }.to change{ User.admins.size }.by(1) }
-      it { admin; expect{ user.after_confirmation }.not_to change{ User.admins.size } }
-    end
-
-    describe '#role?' do
-      it { expect(user.role?(:admin)).to eq false }
-      it { expect(user.role?(:user)).to eq true }
-    end
-
-    describe '#worker?' do
-      it { expect(user.worker?).to eq true }
-      it { expect(api_client.worker?).to eq false }
+      it { expect{ user.after_confirmation }.to change{ User.admin.size }.by(1) }
+      it { admin; expect{ user.after_confirmation }.not_to change{ User.admin.size } }
     end
 
     describe '.find_for_google_oauth2' do

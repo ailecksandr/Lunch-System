@@ -1,23 +1,29 @@
+include WorkingDayseable
+
 FactoryGirl.define do
   factory :order do
     user
-  end
 
-  factory :completed_order, parent: :order do
-    after(:build) do |order, evaluator|
-      Item::TYPES.each do |type|
+    before(:create) do |order|
+      Item.item_types.keys.each do |type|
         item = FactoryGirl.create("#{type.split('_')[0]}_item")
         meal = FactoryGirl.create(:meal, item: item)
-        FactoryGirl.create(:menu_item, order: order, meal: meal)
+        order.menu_items.build(meal: meal)
       end
     end
   end
 
-  factory :closed_order, parent: :completed_order do
+  factory :wrong_order, parent: :order do
+    before(:create) do |order|
+      order.menu_items.destroy_all
+    end
+  end
+
+  factory :closed_order, parent: :order do
     status :closed
   end
 
-  factory :previous_order, parent: :completed_order do
-    created_at Time.now - 1.day
+  factory :previous_order, parent: :order do
+    created_at { working_days_ago(1) }
   end
 end

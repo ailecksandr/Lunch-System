@@ -17,4 +17,3 @@ The test project about lunch ordering.
 3. System can access orders list to api by `/api/v1/orders.json?access_token=<your_access_token>&date=yyyy-mm-dd` # access_token - required, date - optional (default = today)).
     
     Default access token: `1234`.
-4. Tests performs to all models by default `rspec` and to 

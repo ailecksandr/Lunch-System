@@ -1,5 +1,5 @@
 class ApiKey < ApplicationRecord
-  scope :actual, -> { where('expired_at >= ?', Time.now) }
+  scope :actual, -> { where('expired_at >= ? AND static = false', Time.now) }
   scope :static, -> { where(static: true) }
   scope :active, -> { where('expired_at >= ? OR static = true', Time.now) }
   scope :inactive, -> { where('expired_at < ? AND static = false', Time.now) }

@@ -18,12 +18,14 @@ describe MenusHelper do
       let(:order) { FactoryGirl.create(:order) }
 
       before do
-        Timecop.freeze(1.days.ago)
         first_meal
         main_meal
         drink
-        Timecop.return
+
+        Timecop.freeze(1.day.from_now)
       end
+
+      after { Timecop.return }
 
       it { expect(menu_class(working_days_ago(1))).to eq 'panel-info' }
 

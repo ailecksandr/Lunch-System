@@ -1,32 +1,33 @@
 class Order < ApplicationRecord
   include Scopeable
+
   enum status: %w(open closed)
 
-  has_many :menu_items, dependent: :destroy
-  has_many :meals, through: :menu_items
   belongs_to :user
+  belongs_to :first_meal, class_name: Meal
+  belongs_to :main_meal, class_name: Meal
+  belongs_to :drink, class_name: Meal
 
-  accepts_nested_attributes_for :menu_items, allow_destroy: true
-  validate :without_all_meals?, on: :create, if: proc { |order| order.menu_items.size != 3 }
+  validates :first_meal_id, :main_meal_id, :drink_id, presence: true
 
-  Item.item_types.keys.each do |type|
-    define_method type, -> { self.menu_items.joins(meal: :item).where(items: { item_type: Item.item_types[type] }).first.try(:meal) }
+  scope :eager, -> { includes(:user, :first_meal, :main_meal, :drink) }
+
+  def meals
+    Meal.meal_types.keys.map{|type| send(type) }
   end
 
   def total
-    self.menu_items.map(&:meal).sum(&:price)
+    self.meals.sum(&:price)
   end
 
   def self.summary(date = Time.now)
-    Order.up_to_date(date).sum(&:total)
-  end
-
-
-  private
-
-
-  def without_all_meals?
-    errors.add(:base, 'Choose all meals')
+    ActiveRecord::Base.connection.execute("
+      SELECT SUM(price) FROM meals
+      INNER JOIN orders ON meals.id
+      IN (orders.first_meal_id, orders.main_meal_id, orders.drink_id)
+      WHERE orders.created_at >= '#{date.beginning_of_day}' AND
+        orders.created_at <= '#{date.end_of_day}'
+    ")[0]['sum'].to_f
   end
 end
 

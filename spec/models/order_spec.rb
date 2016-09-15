@@ -6,29 +6,45 @@ describe Order do
   let(:main_meal) { order.main_meal }
   let(:drink) { order.drink }
   let(:closed_order) { FactoryGirl.create(:closed_order) }
+  let(:previous_order) { FactoryGirl.create(:previous_order) }
 
   context 'validations' do
     it { is_expected.to define_enum_for(:status).with(%w(open closed)) }
-    it { is_expected.to accept_nested_attributes_for :menu_items }
-    describe '#without_all_meals?' do
-      let(:wrong_order) { FactoryGirl.create(:wrong_order) }
+    it { expect(order).to validate_presence_of(:first_meal_id) }
+    it { expect(order).to validate_presence_of(:main_meal_id) }
+    it { expect(order).to validate_presence_of(:drink_id) }
 
-      it { expect{wrong_order}.to raise_error(ActiveRecord::RecordInvalid) }
-      it { expect{order}.to change(Order, :count).by(1) }
-    end
   end
 
   context 'relations' do
     it { should belong_to(:user) }
-    it { should have_many(:menu_items).dependent(:destroy) }
-    it { should have_many(:meals).through(:menu_items) }
+    it { should belong_to(:first_meal).class_name(Meal) }
+    it { should belong_to(:main_meal).class_name(Meal) }
+    it { should belong_to(:drink).class_name(Meal) }
+  end
+
+  context 'scopes' do
+    before do
+      order
+      previous_order
+    end
+
+    it { expect(Order.up_to_date).to eq [order] }
+    it { expect(Order.up_to_date(working_days_ago(1))).to eq [previous_order] }
+    it { expect(Order.up_to_date(working_days_ago(2))).to eq [] }
+    it { expect(Order.eager.first.association(:user)).to be_loaded }
+    it { expect(Order.eager.first.association(:first_meal)).to be_loaded }
+    it { expect(Order.eager.first.association(:main_meal)).to be_loaded }
+    it { expect(Order.eager.first.association(:drink)).to be_loaded }
+    it { expect(Order.first.association(:user)).not_to be_loaded }
+    it { expect(Order.first.association(:first_meal)).not_to be_loaded }
+    it { expect(Order.first.association(:main_meal)).not_to be_loaded }
+    it { expect(Order.first.association(:drink)).not_to be_loaded }
   end
 
   context 'methods' do
-    describe 'meals' do
-      it { expect(order.first_meal).to eq MenuItem.joins(meal: :item).where(items: { item_type: Item.item_types[:first_meal] }).first.meal }
-      it { expect(order.main_meal).to eq MenuItem.joins(meal: :item).where(items: { item_type: Item.item_types[:main_meal] }).first.meal }
-      it { expect(order.drink).to eq MenuItem.joins(meal: :item).where(items: { item_type: Item.item_types[:drink] }).first.meal }
+    describe '#meals' do
+      it { expect(order.meals).to match_array [order.first_meal, order.main_meal, order.drink] }
     end
 
     describe '#total' do

@@ -1,31 +1,19 @@
 .panel-body
   - if Meal.menu_completed?(date)
     - if date.beginning_of_day == Time.now.beginning_of_day
-      = nested_form_for Order.new do |f|
-        = render partial: 'menus/menu_items', locals: { meals: Meal.up_to_date(date).first_meal, type: :first_meal, f: f }
-        = render partial: 'menus/menu_items', locals: { meals: Meal.up_to_date(date).main_meal, type: :main_meal, f: f }
-        = render partial: 'menus/menu_items', locals: { meals: Meal.up_to_date(date).drink, type: :drink, f: f }
+      = form_for Order.new do |f|
+        - Meal.meal_types.keys.each do |type|
+          = render partial: 'menus/menu_items', locals: { meals: Meal.up_to_date(date).send(type), type: type, f: f }
         = f.hidden_field :user_id, value: current_user.id
         %hr
         .summ
-          .first_meal
-            .col-md-6
-              %h4 First Meal:
-            .col-md-6.text-right
-              %h3 0.0
-              %small UAH
-          .main_meal
-            .col-md-6
-              %h4 Main Meal:
-            .col-md-6.text-right
-              %h3 0.0
-              %small UAH
-          .drink
-            .col-md-6
-              %h4 Drink:
-            .col-md-6.text-right
-              %h3 0.0
-              %small UAH
+          - Meal.meal_types.keys.each do |type|
+            %div{class: type}
+              .col-md-6
+                %h4= "#{humanize_type!(type)}:"
+              .col-md-6.text-right
+                %h3 0.0
+                %small UAH
           .col-md-12
             %hr
           .total
@@ -38,8 +26,7 @@
         %hr
         = f.submit 'Order', class: 'btn btn-danger right'
     - else
-      = render partial: 'menus/menu_items', locals: { meals: Meal.up_to_date(date).first_meal, type: :first_meal }
-      = render partial: 'menus/menu_items', locals: { meals: Meal.up_to_date(date).main_meal, type: :main_meal }
-      = render partial: 'menus/menu_items', locals: { meals: Meal.up_to_date(date).drink, type: :drink }
+      - Meal.meal_types.keys.each do |type|
+        = render partial: 'menus/menu_items', locals: { meals: Meal.up_to_date(date).send(type), type: type }
   - else
     %h2 No menu for that day

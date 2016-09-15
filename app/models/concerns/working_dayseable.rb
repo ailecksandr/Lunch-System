@@ -1,5 +1,5 @@
 module WorkingDayseable
-  def working_days_ago(count)
+  def working_days_ago(count = 0)
     date = Time.now
 
     while weekday?(date) do

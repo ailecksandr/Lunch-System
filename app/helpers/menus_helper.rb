@@ -1,5 +1,5 @@
 module MenusHelper
-  include WorkingDayseable
+  include Paramsable
 
   def menu_class(date)
     case
@@ -9,7 +9,7 @@ module MenusHelper
     end
   end
 
-  def menu_item_index(type)
-    (MenuItem.last.id rescue 0) + Item.item_types[type] + 1
+  def humanize_type!(type)
+    type.to_s.split('_').map(&:capitalize).join(' ')
   end
 end

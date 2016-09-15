@@ -25,12 +25,10 @@ describe Ability do
       it { expect(user_ability).to be_able_to :edit, User }
       it { expect(user_ability).to be_able_to :update, User }
       it { expect(user_ability).to be_able_to :change_password, User }
-      it { expect(user_ability).not_to be_able_to :create, Item }
     end
 
     context 'admin' do
       it { expect(admin_ability).to be_able_to :manage, Order }
-      it { expect(admin_ability).to be_able_to :manage, Item }
       it { expect(admin_ability).to be_able_to :manage, Meal }
       it { expect(admin_ability).to be_able_to :index, User }
       it { expect(admin_ability).to be_able_to :clear_tokens, User }

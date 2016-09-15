@@ -23,36 +23,25 @@ ActiveRecord::Schema.define(version: 20160830142801) do
     t.datetime "updated_at",                   null: false
   end
 
-  create_table "items", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.integer  "item_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_items_on_name", unique: true, using: :btree
-  end
-
   create_table "meals", force: :cascade do |t|
+    t.string   "name",                               null: false
+    t.integer  "meal_type"
     t.decimal  "price",      precision: 7, scale: 2
-    t.integer  "item_id"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
-    t.index ["item_id"], name: "index_meals_on_item_id", using: :btree
-  end
-
-  create_table "menu_items", force: :cascade do |t|
-    t.integer  "order_id"
-    t.integer  "meal_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["meal_id"], name: "index_menu_items_on_meal_id", using: :btree
-    t.index ["order_id"], name: "index_menu_items_on_order_id", using: :btree
   end
 
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "status",     default: 0
+    t.integer  "first_meal_id"
+    t.integer  "main_meal_id"
+    t.integer  "drink_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "status",        default: 0
+    t.index ["drink_id"], name: "index_orders_on_drink_id", using: :btree
+    t.index ["first_meal_id"], name: "index_orders_on_first_meal_id", using: :btree
+    t.index ["main_meal_id"], name: "index_orders_on_main_meal_id", using: :btree
     t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
   end
 

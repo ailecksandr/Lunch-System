@@ -18,12 +18,12 @@ class OrdersController < ApplicationController
   end
 
   def index
-    @orders = Order.up_to_date
+    @orders = Order.eager.up_to_date
   end
 
   def destroy
     @order.update(status: 'closed')
-    @orders = Order.up_to_date(@date)
+    @orders = Order.eager.up_to_date(@date)
 
     respond_to do |format|
       format.js { render 'orders/refresh_orders' }
@@ -35,7 +35,7 @@ class OrdersController < ApplicationController
   end
 
   def refresh_orders
-    @orders = Order.up_to_date(@date)
+    @orders = Order.eager.up_to_date(@date)
   end
 
 
@@ -43,7 +43,7 @@ class OrdersController < ApplicationController
 
 
   def order_params
-    params.require(:order).permit(:user_id, menu_items_attributes: [:id, :meal_id])
+    params.require(:order).permit(:user_id, :first_meal_id, :main_meal_id, :drink_id)
   end
 
   def get_date

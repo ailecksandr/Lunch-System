@@ -5,12 +5,10 @@
     %th.col-md-3 Price
   - meals.each do |meal|
     %tr
-      %td= meal.item.name
+      %td= meal.name
       %td
         = meal.price
         %small UAH
       - if defined?(f)
         %td.actions
-          = f.fields_for MenuItem.new do |ff|
-            = ff.radio_button :meal_id, meal.id, name: "order[menu_items_attributes][#{menu_item_index(type)}][meal_id]",
-                              class: 'radio', checked: false, data: { type: meal.item.item_type, price: meal.price }
+          = f.radio_button "#{type}_id", meal.id, class: 'radio', checked: false, data: { type: meal.meal_type, price: meal.price }

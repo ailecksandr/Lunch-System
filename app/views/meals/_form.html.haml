@@ -5,5 +5,5 @@
   %tbody
     = render partial: 'meals/meals', locals: { meals: meals, type: type }
 
-    = link_to render_modal_path(type: type, purpose: :meals), remote: true do
+    = link_to render_modal_path(type: type), remote: true do
       %i.fa.fa-plus.right

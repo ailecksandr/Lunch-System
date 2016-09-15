@@ -1,6 +1,7 @@
 class MenusController < ApplicationController
-  include ItemsHelper
-  protect_from_forgery except: [:menu_details, :render_modal]
+  include WorkingDayseable
+
+  protect_from_forgery except: :menu_details
 
   load_and_authorize_resource class: 'Meal'
   before_action :authenticate_user!, except: :index
@@ -9,19 +10,7 @@ class MenusController < ApplicationController
   end
 
   def form_today
-  end
-
-  def render_modal
-    case params[:purpose]
-    when 'meals'
-      @type, @meal = params[:type], (params[:meal].present? ? Meal.find(params[:meal]) : nil)
-    when 'items'
-      @item = params[:item].present? ? Item.find(params[:item]) : nil
-    end
-
-    respond_to do |format|
-      format.js { render "#{params[:purpose]}/render_modal.js.erb" }
-    end
+    @meals = Meal.eager.up_to_date.sorted
   end
 
   def menu_details

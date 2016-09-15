@@ -1,5 +1,5 @@
 module MenusHelper
-  include Paramsable
+  include Paramsable, WorkingDayseable
 
   def menu_class(date)
     case

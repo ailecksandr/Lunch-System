@@ -1,6 +1,4 @@
 class MenusController < ApplicationController
-  include WorkingDayseable
-
   protect_from_forgery except: :menu_details
 
   load_and_authorize_resource class: 'Meal'

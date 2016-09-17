@@ -62,6 +62,9 @@ GEM
     bootstrap-select-rails (1.6.3)
     bootstrap_form (2.5.0)
     builder (3.2.2)
+    bullet (5.4.0)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.10.0)
     byebug (9.0.5)
     cancancan (1.15.0)
     climate_control (0.0.3)
@@ -291,6 +294,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (3.0.2)
       execjs (>= 0.3.0, < 3)
+    uniform_notifier (1.10.0)
     warden (1.2.6)
       rack (>= 1.0)
     web-console (3.3.1)
@@ -315,6 +319,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.6)
   bootstrap-select-rails
   bootstrap_form
+  bullet
   byebug
   cancancan
   coffee-rails (~> 4.2)

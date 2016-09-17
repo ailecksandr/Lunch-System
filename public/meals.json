@@ -1,0 +1,88 @@
+{
+  "meals": [
+    {
+      "name": "Common Borsch",
+      "meal_type": "first_meal"
+    },
+    {
+      "name": "Mushroom soup",
+      "meal_type": "first_meal"
+    },
+    {
+      "name": "Solyanka",
+      "meal_type": "first_meal"
+    },
+    {
+      "name": "Fish soup",
+      "meal_type": "first_meal"
+    },
+    {
+      "name": "Harcho",
+      "meal_type": "first_meal"
+    },
+    {
+      "name": "Noodle soup",
+      "meal_type": "first_meal"
+    },
+    {
+      "name": "Chicken soup",
+      "meal_type": "first_meal"
+    },
+    {
+      "name": "Boiled potatoes with chop",
+      "meal_type": "main_meal"
+    },
+    {
+      "name": "Noodle with meat",
+      "meal_type": "main_meal"
+    },
+    {
+      "name": "Buckwheat with chicken breast",
+      "meal_type": "main_meal"
+    },
+    {
+      "name": "Fried potatoes with sausages",
+      "meal_type": "main_meal"
+    },
+    {
+      "name": "Holubci",
+      "meal_type": "main_meal"
+    },
+    {
+      "name": "Stuffed pepper in tomato sauce",
+      "meal_type": "main_meal"
+    },
+    {
+      "name": "Pilau with meat",
+      "meal_type": "main_meal"
+    },
+    {
+      "name": "Cherry juice",
+      "meal_type": "drink"
+    },
+    {
+      "name": "Black tea",
+      "meal_type": "drink"
+    },
+    {
+      "name": "Milk",
+      "meal_type": "drink"
+    },
+    {
+      "name": "Orange juice",
+      "meal_type": "drink"
+    },
+    {
+      "name": "Apple compote",
+      "meal_type": "drink"
+    },
+    {
+      "name": "Coca-Cola",
+      "meal_type": "drink"
+    },
+    {
+      "name": "7-Up",
+      "meal_type": "drink"
+    }
+  ]
+}

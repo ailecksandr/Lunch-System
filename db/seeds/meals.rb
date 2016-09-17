@@ -1,17 +1,21 @@
-include WorkingDayseable
+include WorkingDayseable, Paramsable
 
 Meal.delete_all
 
+meals_params = meals_params_from_file
+
 (1..5).each do |i|
-  Item.item_types.keys.each do |type|
+  Meal.meal_types.keys.each do |type|
+    existing_names = []
+
     Random.rand(1..5).times do
-      existing_item_names = Meal.up_to_date(working_days_ago(i)).joins(:item).where(items: { item_type: Item.item_types[type] }).pluck(:name).uniq
-      collection = Item.send(type).where.not(name: existing_item_names)
-      Meal.create(
-          price: Random.rand((type != 'drink')? (10.0...75.0) : (1.0...10.0)),
+      params = meals_params[type].select{|params| existing_names.exclude? params[:name] }.sample
+      params.merge!(
           created_at: working_days_ago(i),
-          item: collection.offset(Random.rand(collection.size)).first
+          price: Random.rand((type != 'drink')? (10.0...75.0) : (1.0...10.0))
       )
+      Meal.create(params)
+      existing_names << params[:name]
     end
   end
 end

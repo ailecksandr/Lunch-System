@@ -3,9 +3,10 @@
 = bootstrap_form_for meal.present? ? meal : Meal.new, remote: true, format: :js do |f|
   .modal-body
     .form-group
-      = f.select :item_id, options_from_collection_for_select(Item.send("#{type}"), :id, :name, selected: meal.present? ? meal.item.id : ''), { include_blank: '<Nothing is selected>'}
+      = f.select :name, options_for_select(meals_params_from_file[type].map{|params| params[:name] }, selected: f.object.name), { include_blank: '<Nothing is selected>' }
     .form-group
       = f.number_field :price, step: '0.01', min: '0.01'
+    = f.hidden_field :meal_type, value: type
     = hidden_field_tag :type, type
   .modal-footer
     .actions

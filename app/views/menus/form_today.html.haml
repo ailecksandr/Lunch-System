@@ -1,12 +1,7 @@
-%h4 First meals
-.well.well-lg.first_meals
-  = render partial: 'meals/form', locals: { meals: Meal.up_to_date.first_meal, type: :first_meal }
-%h4 Main meals
-.well.well-lg.main_meals
-  = render partial: 'meals/form', locals: { meals: Meal.up_to_date.main_meal, type: :main_meal }
-%h4 Drinks
-.well.well-lg.drinks
-  = render partial: 'meals/form', locals: { meals: Meal.up_to_date.drink, type: :drink }
+- Meal.meal_types.keys.each do |type|
+  %h4= "#{humanize_type!(type)}s"
+  .well.well-lg{class: "#{type}s"}
+    = render partial: 'meals/form', locals: { meals: Meal.up_to_date.send(type), type: type }
 
 .modal.fade{ id: 'meals-action', 'aria-hidden': true, 'aria-labelledby': :myModalLabel, role: :dialog, tabindex: '-1' }
   .modal-dialog

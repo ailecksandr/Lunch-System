@@ -19,6 +19,11 @@ class MealsController < ApplicationController
     respond_to :js
   end
 
+  def render_modal
+    @meal = (params[:id].present? ? Meal.find(params[:id]) : nil)
+    respond_to :js
+  end
+
 
   private
 
@@ -28,6 +33,6 @@ class MealsController < ApplicationController
   end
 
   def meal_params
-    params.require(:meal).permit(:price, :item_id)
+    params.require(:meal).permit(:name, :price, :meal_type)
   end
 end

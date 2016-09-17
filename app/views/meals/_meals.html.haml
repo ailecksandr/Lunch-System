@@ -1,10 +1,11 @@
 - meals.each do |meal|
   %tr
-    %td= meal.item.name
+    %td= meal.name
     %td= meal.price
     %td.actions
-      = link_to render_modal_path(meal: meal, type: type, purpose: :meals), remote: true do
+      = link_to render_modal_path(id: meal, type: type), remote: true do
         %i.fa.fa-pencil
-      - if Order.joins(:menu_items).limit(1).where(menu_items: { meal: meal }).empty?
+          -byebug
+      - if Order.where("#{type}_id" => meal.id).empty?
         = link_to meal_path(meal, type: type), method: :delete, remote: true, data: { confirm: 'Are you sure?'} do
           %i.fa.fa-trash

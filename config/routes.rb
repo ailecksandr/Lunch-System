@@ -15,9 +15,8 @@ Rails.application.routes.draw do
   resources :menus
   get 'form_today', to: 'menus#form_today', as: :form_today_menu
   get 'menu_details', to: 'menus#menu_details', as: :menu_details
-  get 'render_modal', to: 'menus#render_modal', as: :render_modal
+  get 'render_modal', to: 'meals#render_modal', as: :render_modal
 
-  resources :items
   resources :meals
 
   resources :orders

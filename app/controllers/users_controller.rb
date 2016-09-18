@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @users = User.all.order(:nickname).worker
+    @users = User.worker.order(:nickname)
   end
 
   def token

@@ -7,24 +7,13 @@
         = f.hidden_field :user_id, value: current_user.id
         %hr
         .summ
-          .first_meal
-            .col-md-6
-              %h4 First Meal:
-            .col-md-6.text-right
-              %h3 0.0
-              %small UAH
-          .main_meal
-            .col-md-6
-              %h4 Main Meal:
-            .col-md-6.text-right
-              %h3 0.0
-              %small UAH
-          .drink
-            .col-md-6
-              %h4 Drink:
-            .col-md-6.text-right
-              %h3 0.0
-              %small UAH
+          - Meal.meal_types.keys.each do |type|
+            %div{class: type}
+              .col-md-6
+                %h4= "#{humanize_type!(type)}:"
+              .col-md-6.text-right
+                %h3 0.0
+                %small UAH
           .col-md-12
             %hr
           .total

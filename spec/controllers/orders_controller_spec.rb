@@ -3,9 +3,9 @@ require 'rails_helper'
 describe OrdersController do
   let(:user) { FactoryGirl.create(:user) }
   let(:admin) { FactoryGirl.create(:admin) }
-  let(:meal) { FactoryGirl.create(:meal, item: FactoryGirl.create(:first_item)) }
-  let(:main_meal) { FactoryGirl.create(:meal, item: FactoryGirl.create(:main_item)) }
-  let(:drink) { FactoryGirl.create(:meal, item: FactoryGirl.create(:drink_item)) }
+  let(:meal) { FactoryGirl.create(:meal) }
+  let(:main_meal) { FactoryGirl.create(:main_meal) }
+  let(:drink) { FactoryGirl.create(:drink) }
   let(:order) { FactoryGirl.create(:order) }
   let(:closed_order) { FactoryGirl.create(:closed_order) }
   let(:previous_order) { FactoryGirl.create(:previous_order) }
@@ -22,10 +22,9 @@ describe OrdersController do
 
     describe '#create' do
       context 'success' do
-        before { @proc = -> { post :create, params: { order: { user_id: user.id, menu_items_attributes: { 1 => { meal_id: meal.id }, 2 => { meal_id: main_meal.id }, 3 => { meal_id: drink.id } } } } } }
+        before { @proc = -> { post :create, params: { order: { user_id: user.id, first_meal_id: meal.id, main_meal_id: main_meal.id, drink_id: drink.id } } } }
 
         it { expect{ @proc.call }.to change(Order, :count).by(1) }
-        it { expect{ @proc.call }.to change(MenuItem, :count).by(3) }
         it { @proc.call; expect(controller).to set_flash[:success].to('Successfully ordered') }
         it { expect(@proc.call).to redirect_to root_path }
       end
@@ -34,7 +33,6 @@ describe OrdersController do
         before { @proc = -> { post :create, params: { order: { user_id: user } } } }
 
         it { expect{ @proc.call }.not_to change(Order, :count) }
-        it { expect{ @proc.call }.not_to change(MenuItem, :count) }
         it { expect(@proc.call).to redirect_to root_path }
       end
     end

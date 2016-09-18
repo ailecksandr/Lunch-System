@@ -10,6 +10,7 @@ class MenusController < ApplicationController
   end
 
   def form_today
+    @meals = Meal.eager.up_to_date.sorted
   end
 
   def menu_details

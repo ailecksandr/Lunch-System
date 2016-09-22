@@ -12,6 +12,14 @@ abort('The Rails environment is running in production mode!') if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 
+require 'capybara/rails'
+require 'capybara/rspec'
+
+Capybara.configure do |config|
+  config.javascript_driver = :webkit
+  config.current_driver = :webkit
+end
+
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
     with.test_framework :rspec
@@ -24,6 +32,7 @@ ActiveRecord::Migration.maintain_test_schema!
 RSpec.configure do |config|
   config.include Paperclip::Shoulda::Matchers
   config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Warden::Test::Helpers
   config.include WorkingDayseable
 
   config.before do

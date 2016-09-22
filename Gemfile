@@ -54,6 +54,8 @@ group :test do
   gem 'shoulda-matchers'
   gem 'database_cleaner'
   gem 'rails-controller-testing'
+  gem 'capybara'
+  gem 'capybara-webkit'
 end
 
 group :development do

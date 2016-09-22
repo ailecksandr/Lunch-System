@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :meal do
     name Faker::Commerce.product_name
     meal_type :first_meal
-    price Faker::Commerce.price(100)
+    price 1 + Faker::Commerce.price(100)
   end
 
   factory :main_meal, parent: :meal do

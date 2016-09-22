@@ -20,7 +20,7 @@
                   = link_to 'Orders list', orders_path
                 - if can? :form_today, Meal
                   %li
-                    = link_to 'Today\'s menu', form_today_menu_path
+                    = link_to 'Create menu', form_today_menu_path
                 %li
                   = link_to 'Clear tokens', clear_tokens_path
           - if can? :token, User

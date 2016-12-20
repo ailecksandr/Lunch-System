@@ -17,6 +17,7 @@
 .rspec
 coverage
 public/system
+spec/screenshots
 
 # Ignore Byebug command history file.
 .byebug_history

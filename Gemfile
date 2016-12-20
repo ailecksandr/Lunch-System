@@ -48,6 +48,7 @@ group :development, :test do
   gem 'timecop'
   gem 'simplecov'
   gem 'faker'
+  gem 'poltergeist'
 end
 
 group :test do
@@ -57,6 +58,7 @@ group :test do
   gem 'rails-controller-testing'
   gem 'capybara'
   gem 'capybara-webkit'
+  gem 'capybara-screenshot'
 end
 
 group :development do

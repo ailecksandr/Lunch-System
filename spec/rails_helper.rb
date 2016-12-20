@@ -11,14 +11,7 @@ require 'paperclip/matchers'
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
-
-require 'capybara/rails'
-require 'capybara/rspec'
-
-Capybara.configure do |config|
-  config.javascript_driver = :webkit
-  config.current_driver = :webkit
-end
+require 'support/capybara'
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|

@@ -183,7 +183,20 @@ feature 'Pages' do
       within 'div.navbar-static-top' do
         expect(page).to have_selector('li a', text: 'Private cabinet')
         expect(page).to have_selector('li a', text: 'Admin panel')
-        expect(page).to have_selector('li a', text: 'Admin panel')
+        expect(page).to have_selector('li a', text: 'Logout')
+      end
+    end
+  end
+
+  context 'api_client' do
+    before { login_as api_client }
+    after { Warden.test_reset! }
+
+    scenario 'actions' do
+      visit root_path
+      within('div.navbar-static-top') do
+        expect(page).not_to have_selector('li a', text: 'Private cabinet')
+        expect(page).to have_selector('li a', text: 'Generate token')
       end
     end
   end
